@@ -1,4 +1,4 @@
-package ClassWork.p070717;
+package HomeWork.p070717;
 
 import java.util.Arrays;
 

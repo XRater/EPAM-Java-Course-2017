@@ -1,8 +1,10 @@
 package ClassWork.p070717;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class Collections {
+public class CollectionsExamples {
 
     public static void main(String[] args) {
 
@@ -13,6 +15,10 @@ public class Collections {
         list.add("three");
 
         System.out.println(list);
+
+        List<String> unmodifiableList = Collections.unmodifiableList(list);
+
+        unmodifiableList.set(0, "change");
     }
 
 }

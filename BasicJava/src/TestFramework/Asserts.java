@@ -1,5 +1,7 @@
 package TestFramework;
 
+import java.util.Arrays;
+
 public class Asserts {
 
     public static boolean assertEquals(String actual, String expected) {
@@ -19,7 +21,6 @@ public class Asserts {
         }
         return notEquals;
     }
-
     public static boolean assertEquals(int actual, int expected) {
         boolean equals = actual == expected;
         if (!equals) {
@@ -56,4 +57,21 @@ public class Asserts {
         return notEquals;
     }
 
+    public static boolean assertEquals(int[] actual, int[] expected) {
+        boolean equals = Arrays.equals(actual, expected);
+        if (!equals) {
+            System.err.println("Test failed: expected '" + Arrays.toString(expected)
+                    + "', but actual '" + Arrays.toString(actual) + "'");
+        }
+        return equals;
+    }
+
+    public static boolean assertNotEquals(int[] actual, int[] expected) {
+        boolean notEquals = !Arrays.equals(actual, expected);
+        if (!notEquals) {
+            System.err.println("Test failed: expected NOT " + Arrays.toString(expected)
+                    + ", but actual " + Arrays.toString(actual));
+        }
+        return notEquals;
+    }
 }
