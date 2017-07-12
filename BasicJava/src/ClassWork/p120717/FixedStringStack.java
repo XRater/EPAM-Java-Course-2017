@@ -58,6 +58,7 @@ public class FixedStringStack {
 
         StringBuilder sb = new StringBuilder();
 
+
         sb.append('[');
 
         for (int i = 0; i < this.size_ - 1; i++)
