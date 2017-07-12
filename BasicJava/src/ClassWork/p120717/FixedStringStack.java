@@ -14,56 +14,56 @@ public class FixedStringStack {
     }
 
     public FixedStringStack(int maxSize) {
-                data_ = new String[maxSize];
-        size_ = 0;
-        maxSize_ = maxSize;
+                this.data_ = new String[maxSize];
+        this.size_ = 0;
+        this.maxSize_ = maxSize;
     }
 
     public int getSize() {
-        return size_;
+        return this.size_;
     }
 
     public boolean isEmpty() {
-        return size_ == 0;
+        return this.size_ == 0;
     }
 
     public boolean push(String string) {
-        if (size_ == maxSize_)
+        if (this.size_ == this.maxSize_)
             return false;
 
-        data_[size_++] = string;
+        this.data_[this.size_++] = string;
         return true;
     }
 
     public String top() {
-        if (size_ == 0)
+        if (this.size_ == 0)
             return null;
 
-        return data_[size_ - 1];
+        return data_[this.size_ - 1];
     }
 
     public String pop() {
-        if (size_ == 0)
+        if (this.size_ == 0)
             return null;
 
         String ans = top();
-        data_[--size_] = null;
+        this.data_[--this.size_] = null;
         return ans;
     }
 
     @Override
     public String toString() {
-        if (size_ == 0)
+        if (this.size_ == 0)
             return "[]";
 
         StringBuilder sb = new StringBuilder();
 
         sb.append('[');
 
-        for (int i = 0; i < size_ - 1; i++)
-            sb.append(data_[i]).append(", ");
+        for (int i = 0; i < this.size_ - 1; i++)
+            sb.append(this.data_[i]).append(", ");
 
-        sb.append(data_[size_ - 1]);
+        sb.append(this.data_[this.size_ - 1]);
         sb.append(']');
 
         return sb.toString();
