@@ -6,7 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class NetExample {
+public class NetServer {
 
     private static final int DEFAULT_PORT = 10000;
 

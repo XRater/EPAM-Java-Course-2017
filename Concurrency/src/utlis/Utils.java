@@ -1,4 +1,13 @@
 package utlis;
 
-public class BaseUtils {
+public class Utils {
+
+    public static void pause(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
