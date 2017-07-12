@@ -10,11 +10,11 @@ public class StringArrayList {
     static private String[] data_ = new String[DEFAULT_SIZE];
 
 
-    public static String get(int index) {
+    public String get(int index) {
         return data_[index];
     }
 
-    public static void set(int index, String string) {
+    public void set(int index, String string) {
         data_[index] = string;
     }
 
@@ -22,7 +22,7 @@ public class StringArrayList {
         return size_;
     }
 
-    boolean isEmpty() {
+    public boolean isEmpty() {
         return size_ == 0;
     }
 

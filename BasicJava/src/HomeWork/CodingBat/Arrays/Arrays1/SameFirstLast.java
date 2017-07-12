@@ -1,4 +1,4 @@
-package HomeWork.CodingBat.Arrays;
+package HomeWork.CodingBat.Arrays.Arrays1;
 
 public class SameFirstLast {
 
