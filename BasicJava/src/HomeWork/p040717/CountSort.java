@@ -6,13 +6,13 @@ import static HomeWork.p040717.SortsTest.testCount;
 
 public class CountSort {
 
-    static final int MINF = Integer.MIN_VALUE;
-    static final int INF = Integer.MAX_VALUE;
-
-
+/*
+    //Base count sort method. Evaluates maximal and minimal values and
+    // calls sort(array, min, max) method
+*/
     public static void sort(int[] a) {
-        int max = MINF;
-        int min = INF;
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
         for (int value : a) {
             if (max < value)
                 max = value;
@@ -22,6 +22,7 @@ public class CountSort {
         sort(a, min, max + 1);
     }
 
+    //Method for sort digits [0,9). Used for Radix Sort.
     public static void sortDigits(int[] a) {
         sort(a, 0, 10);
     }
@@ -38,7 +39,7 @@ public class CountSort {
                 a[index++] = i + mn;
     }
 
-
+    //main for easier testing
     public static void main(String[] args) {
         testCount();
     }
