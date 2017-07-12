@@ -1,8 +1,14 @@
 package HomeWork.p040717;
 
+import TestFramework.Asserts;
+
+import java.util.Random;
+
 class Digits {
 
-    private final int SIZE = 9;
+    private static final int TEST_NUMBER = 1000;
+
+    private final int SIZE = 11;
     private final int[] digits_ = new int[SIZE];
     private int length_;
 
@@ -31,4 +37,19 @@ class Digits {
 
         return sb.reverse().toString();
     }
+
+    public static void main(String[] args) {
+
+        Random random = new Random();
+        for (int i = 0; i < TEST_NUMBER; i++) {
+            int value = random.nextInt(Integer.MAX_VALUE);
+
+            Integer val = value;
+            Digits d = new Digits(value);
+
+            Asserts.assertEquals(d.toString(), val.toString());
+        }
+
+    }
+
 }

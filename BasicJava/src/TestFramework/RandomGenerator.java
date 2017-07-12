@@ -1,6 +1,5 @@
 package TestFramework;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class RandomGenerator {
@@ -8,6 +7,7 @@ public class RandomGenerator {
     public static void generate_random_array(int[] array, int maxInt) {
         generate_random_array(array, 0, maxInt);
     }
+
 
     //WARNING this method works badly if (maxInt - minInt) > Intger.MAX_VALUE
     public static void generate_random_array(int[] array, int minInt, int maxInt) {
