@@ -6,20 +6,22 @@ import static HomeWork.p040717.SortsTest.testCount;
 
 public class CountSort {
 
-/*
-    //Base count sort method. Evaluates maximal and minimal values and
-    // calls sort(array, min, max) method
-*/
-    public static void sort(int[] a) {
+    private static final int DIGIT_NUMBER = 10;
+
+    /*
+        //Base count sort method. Evaluates maximal and minimal values and
+        // calls sort(array, min, max) method
+    */
+    public static void sort(int[] array) {
         int max = Integer.MIN_VALUE;
         int min = Integer.MAX_VALUE;
-        for (int value : a) {
+        for (int value : array) {
             if (max < value)
                 max = value;
             if (min > value)
                 min = value;
         }
-        sort(a, min, max + 1);
+        sort(array, min, max + 1);
     }
 
     //Method for sort digits [0,9). Used for Radix Sort.
@@ -28,15 +30,41 @@ public class CountSort {
     }
 
     //All numbers are greater or equal then mn and less then mx (every vlue \in [,mn mx))
-    private static void sort(int[] a, int mn, int mx) {
-        int[] count = new int[mx - mn];
-        for (int value: a)
+    private static void sort(int[] array, int mn, int mx) {
+
+        //count frequencies
+        int m = mx - mn;
+        int[] count = new int[m];
+        for (int value : array)
             count[value - mn]++;
 
-        int index = 0;
-        for (int i = 0; i < count.length; i++)
-            for (int j = 0; j < count[i]; j++)
-                a[index++] = i + mn;
+        //evaluate start of every block
+        int[] pos = new int[m];
+        for (int i = 0; i + 1 < m; i++)
+            pos[i + 1] = pos[i] + count[i];
+
+        //fill result array
+        int[] copyOfa = Arrays.copyOf(array, array.length);
+        for (int value : copyOfa)
+            array[pos[value - mn]++] = value;
+    }
+
+    public static void sortByDigit(Digits[] array, int index) {
+
+        //count frequencies
+        int[] count = new int[DIGIT_NUMBER];
+        for (Digits value : array)
+            count[value.get(index)]++;
+
+        //evaluate start of every block
+        int[] pos = new int[DIGIT_NUMBER];
+        for (int i = 0; i + 1 < DIGIT_NUMBER; i++)
+            pos[i + 1] = pos[i] + count[i];
+
+        //fill result array
+        Digits[] copyOfa = Arrays.copyOf(array, array.length);
+        for (Digits value : copyOfa)
+            array[pos[value.get(index)]++] = value;
     }
 
     //main for easier testing

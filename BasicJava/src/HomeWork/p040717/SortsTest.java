@@ -13,7 +13,7 @@ public class SortsTest {
 
     public static void main(String[] args) {
 
-        testCount();
+//        testCount();
         testRadix();
 
     }
@@ -30,7 +30,6 @@ public class SortsTest {
         Arrays.sort(b);
 
         Asserts.assertEquals(a, b);
-        System.out.println(Arrays.toString(a));
     }
 
     private static void testRadix() {
