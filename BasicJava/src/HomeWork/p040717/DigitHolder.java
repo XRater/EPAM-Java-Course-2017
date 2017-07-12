@@ -4,15 +4,17 @@ import TestFramework.Asserts;
 
 import java.util.Random;
 
-class Digits {
+class DigitHolder {
 
     private static final int TEST_NUMBER = 1000;
 
-    private final int SIZE = 11;
+    static final int SIZE = 11;
+
     private final int[] digits_ = new int[SIZE];
     private int length_;
 
-    public Digits(int number) {
+//    Constructor from integer number. Fills unused space of digits_ with zeroes
+    public DigitHolder(int number) {
         for (int i = 0; i < SIZE; i++) {
             if (number != 0)
                 length_++;
@@ -38,6 +40,7 @@ class Digits {
         return sb.reverse().toString();
     }
 
+    //Some tests
     public static void main(String[] args) {
 
         Random random = new Random();
@@ -45,7 +48,7 @@ class Digits {
             int value = random.nextInt(Integer.MAX_VALUE);
 
             Integer val = value;
-            Digits d = new Digits(value);
+            DigitHolder d = new DigitHolder(value);
 
             Asserts.assertEquals(d.toString(), val.toString());
         }

@@ -2,7 +2,7 @@ package HomeWork.p040717;
 
 import java.util.Arrays;
 
-import static HomeWork.p040717.SortsTest.testCount;
+import static HomeWork.p040717.SortsTest.testRadixSort;
 
 public class CountSort {
 
@@ -49,11 +49,11 @@ public class CountSort {
             array[pos[value - mn]++] = value;
     }
 
-    public static void sortByDigit(Digits[] array, int index) {
+    public static void sortByDigit(DigitHolder[] array, int index) {
 
         //count frequencies
         int[] count = new int[DIGIT_NUMBER];
-        for (Digits value : array)
+        for (DigitHolder value : array)
             count[value.get(index)]++;
 
         //evaluate start of every block
@@ -62,13 +62,14 @@ public class CountSort {
             pos[i + 1] = pos[i] + count[i];
 
         //fill result array
-        Digits[] copyOfa = Arrays.copyOf(array, array.length);
-        for (Digits value : copyOfa)
-            array[pos[value.get(index)]++] = value;
+        DigitHolder[] copyOfa = Arrays.copyOf(array, array.length);
+        for (int i = 0; i < array.length; i++) {
+            array[pos[copyOfa[i].get(index)]++] = copyOfa[i];
+        }
     }
 
     //main for easier testing
     public static void main(String[] args) {
-        testCount();
+        testRadixSort();
     }
 }
