@@ -3,23 +3,22 @@ package HomeWork.p040717;
 import TestFramework.Asserts;
 import TestFramework.RandomGenerator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SortsTest {
 
     private static final int MAX_INT = 100;
-    private static final int MIN_INT = -100;
-    private static final int INTS_NUMBER = 10;
+    private static final int MIN_INT = 0;
+    private static final int INTS_NUMBER = 10000;
 
     public static void main(String[] args) {
 
-        test_count();
-        test_radix();
+        testCount();
+        testRadix();
 
     }
 
-    private static void test_count() {
+    static void testCount() {
 
         int[] a = new int[INTS_NUMBER];
         int[] b;
@@ -34,7 +33,7 @@ public class SortsTest {
 
     }
 
-    private static void test_radix() {
+    private static void testRadix() {
 
     }
 

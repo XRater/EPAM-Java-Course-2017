@@ -1,5 +1,9 @@
 package HomeWork.p040717;
 
+import java.util.Arrays;
+
+import static HomeWork.p040717.SortsTest.testCount;
+
 public class CountSort {
 
     static final int MINF = Integer.MIN_VALUE;
@@ -9,13 +13,13 @@ public class CountSort {
     public static void sort(int[] a) {
         int max = MINF;
         int min = INF;
-        for (int i = 0; i < a.length; i++) {
-            if (max < a[i])
-                max = a[i];
-            if (min > a[i])
-                min = a[i];
+        for (int value : a) {
+            if (max < value)
+                max = value;
+            if (min > value)
+                min = value;
         }
-        sort(a, min, max);
+        sort(a, min, max + 1);
     }
 
     public static void sortDigits(int[] a) {
@@ -23,13 +27,18 @@ public class CountSort {
     }
 
     private static void sort(int[] a, int mn, int mx) {
-        for (int i = 0; i < a.length; i++)
-            for (int j = 0; j < a.length; j++)
-                if (a[i] < a[j]) {
-                    int tmp = a[i];
-                    a[i] = a[j];
-                    a[j] = tmp;
-                }
+        int[] count = new int[mx - mn];
+        for (int value: a)
+            count[value + mn]++;
+
+        int index = 0;
+        for (int i = 0; i < count.length; i++)
+            for (int j = 0; j < count[i]; j++)
+                a[index++] = i + mn;
     }
 
+
+    public static void main(String[] args) {
+        testCount();
+    }
 }
