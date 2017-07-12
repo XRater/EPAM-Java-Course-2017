@@ -26,6 +26,7 @@ public class CountSort {
         sort(a, 0, 10);
     }
 
+    //All numbers are greater or equal then mn and less then mx (every vlue \in [,mn mx))
     private static void sort(int[] a, int mn, int mx) {
         int[] count = new int[mx - mn];
         for (int value: a)

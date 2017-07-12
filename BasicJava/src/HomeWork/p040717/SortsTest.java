@@ -30,7 +30,7 @@ public class SortsTest {
         Arrays.sort(b);
 
         Asserts.assertEquals(a, b);
-
+        System.out.println(Arrays.toString(a));
     }
 
     private static void testRadix() {

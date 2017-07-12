@@ -17,6 +17,6 @@ public class RandomGenerator {
         Random random = new Random();
 
         for (int i = 0; i < array.length; i++)
-            array[i] = random.nextInt(maxInt - minInt) - minInt;
+            array[i] = random.nextInt(maxInt - minInt) + minInt;
     }
 }
