@@ -29,7 +29,7 @@ public class CountSort {
     private static void sort(int[] a, int mn, int mx) {
         int[] count = new int[mx - mn];
         for (int value: a)
-            count[value + mn]++;
+            count[value - mn]++;
 
         int index = 0;
         for (int i = 0; i < count.length; i++)

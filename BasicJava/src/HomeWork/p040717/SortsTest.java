@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class SortsTest {
 
     private static final int MAX_INT = 100;
-    private static final int MIN_INT = 0;
+    private static final int MIN_INT = -100;
     private static final int INTS_NUMBER = 10000;
 
     public static void main(String[] args) {
