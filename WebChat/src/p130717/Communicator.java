@@ -6,9 +6,9 @@ import java.net.Socket;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-import static p050717.NetServer.DEFAULT_PORT;
+import static p130717.ChatServer.DEFAULT_PORT;
 
-public class ChatClient {
+class ChatClient {
 
     PrintWriter writer;
 
