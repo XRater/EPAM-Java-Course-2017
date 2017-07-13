@@ -24,8 +24,8 @@ public class PhilosophersProblem {
 
         for (int i = 0; i < QUANTITY; i++) {
             int finalI = i;
-            new Thread(()->{
-                philosophers[finalI].processSimple();
+            new Thread(()-> {
+                philosophers[finalI].processSmart();
             }).start();
         }
     }

@@ -40,7 +40,50 @@ public class Philosopher {
     }
 
     public void processSmart() {
+        while (true) {
 
+            if (left.getNumber() < right.getNumber()) {
+                this.message("Getting left fork");
+                synchronized (left) {
+                    left.takeFork(this);
+                    this.message("Got left fork");
+
+                    this.message("Getting right fork");
+                    synchronized (right) {
+                        right.takeFork(this);
+                        this.message("Got right fork");
+
+                        eat();
+
+                        this.message("Putting down right fork");
+                        right.drop();
+                    }
+
+                    left.drop();
+                    this.message("Putting down left fork");
+                }
+            } else {
+                this.message("Getting right fork");
+                synchronized (right) {
+                    right.takeFork(this);
+                    this.message("Got right fork");
+
+                    this.message("Getting left fork");
+                    synchronized (left) {
+                        left.takeFork(this);
+                        this.message("Got left fork");
+
+                        eat();
+
+                        this.message("Putting down left fork");
+                        left.drop();
+                    }
+
+                    right.drop();
+                    this.message("Putting down right fork");
+                }
+            }
+        }
     }
 
     private void eat() {

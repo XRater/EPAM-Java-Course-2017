@@ -22,4 +22,7 @@ public class Fork {
         System.out.println("Fork " + number + " is now released");
     }
 
+    public int getNumber() {
+        return number;
+    }
 }
