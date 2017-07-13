@@ -4,41 +4,53 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.function.Consumer;
+
+import static p050717.NetServer.DEFAULT_PORT;
 
 public class ChatClient {
 
-    public static void main(String[] args) {
+    PrintWriter writer;
 
+    public void init(Consumer<String> consumer) {
         try {
-            Socket socket = new Socket("localhost", 10000);
+            Socket socket = new Socket("localhost", DEFAULT_PORT);
 
             Scanner serverScanner = new Scanner(socket.getInputStream());
-            PrintWriter writer = new PrintWriter(socket.getOutputStream());
+            writer = new PrintWriter(socket.getOutputStream());
 
-            Scanner keyboardScanner = new Scanner(System.in);
-
-            readMessages(writer, keyboardScanner);
-
-
-            while (serverScanner.hasNextLine()) {
-                String line = serverScanner.nextLine();
-                System.out.println(line);
-            }
+            new Thread(() -> {
+                while (serverScanner.hasNextLine()) {
+                    String line = serverScanner.nextLine();
+                    consumer.accept(line);
+                }
+            }).start();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-    private static void readMessages(PrintWriter writer, Scanner keyboardScanner) {
+    public void sendTextToServer(String line) {
+        System.out.println(line);
+        writer.println(line);
+        writer.flush();
+    }
+
+    public static void main(String[] args) {
+
+        ChatClient chat = new ChatClient();
+        Scanner keyboardScanner = new Scanner(System.in);
+
+        chat.init(System.out::println);
+
         new Thread( () -> {
             while (keyboardScanner.hasNextLine()) {
                 String line = keyboardScanner.nextLine();
-                writer.println(line);
-                writer.flush();
+                chat.sendTextToServer(line);
             }
         }).start();
+
     }
 
 }

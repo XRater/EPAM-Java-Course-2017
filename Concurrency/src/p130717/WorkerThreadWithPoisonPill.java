@@ -3,18 +3,21 @@ package p130717;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class WorkerThreadWithShutDown2 {
+@SuppressWarnings("SynchronizeOnNonFinalField")
+public class WorkerThreadWithPoisonPill {
 
     private final Thread thread;
     private Queue<Runnable> tasks = new LinkedList<>();
-    private boolean running;
+    volatile private boolean mayAcceptTasks;
 
     static final private Runnable POISON_PILL = () -> {};
 
-    public WorkerThreadWithShutDown2() {
-        thread = new Thread(this::process);
-        thread.start();
-        running = true;
+    public WorkerThreadWithPoisonPill() {
+        synchronized (tasks) {
+            thread = new Thread(this::process);
+            thread.start();
+            mayAcceptTasks = true;
+        }
     }
 
     public void shutdown() {
@@ -34,15 +37,22 @@ public class WorkerThreadWithShutDown2 {
                 }
                 task = tasks.poll();
             }
+            if (task == POISON_PILL)
+                break;
             task.run();
         }
     }
 
-    public void submit(Runnable task) {
+    public boolean submit(Runnable task) {
         synchronized (tasks) {
+            if (!mayAcceptTasks)
+                return false;
+            if (task == POISON_PILL)
+                mayAcceptTasks = false;
             tasks.add(task);
             tasks.notify();
         }
+        return true;
     }
 
 

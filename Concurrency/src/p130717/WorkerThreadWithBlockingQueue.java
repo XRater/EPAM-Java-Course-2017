@@ -4,16 +4,18 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 @SuppressWarnings("SynchronizeOnNonFinalField")
-public class WorkerThreadWithPoisonPill {
+public class WorkerThreadWithBlockingQueue {
 
+    BlockingQueue<Runnable> tasks = new BlockingQueue<>();
     private final Thread thread;
-    private Queue<Runnable> tasks = new LinkedList<>();
     volatile private boolean mayAcceptTasks;
+
+    private final Object lock = new Object();
 
     static final private Runnable POISON_PILL = () -> {};
 
-    public WorkerThreadWithPoisonPill() {
-        synchronized (tasks) {
+    public WorkerThreadWithBlockingQueue() {
+        synchronized (lock) {
             thread = new Thread(this::process);
             thread.start();
             mayAcceptTasks = true;
@@ -26,17 +28,7 @@ public class WorkerThreadWithPoisonPill {
 
     private void process() {
         while (true) {
-            Runnable task = null;
-            synchronized (tasks) {
-                while (tasks.isEmpty()) {
-                    try {
-                        tasks.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                task = tasks.poll();
-            }
+            Runnable task = tasks.take();
             if (task == POISON_PILL)
                 break;
             task.run();
@@ -44,16 +36,14 @@ public class WorkerThreadWithPoisonPill {
     }
 
     public boolean submit(Runnable task) {
-        synchronized (tasks) {
+        synchronized (lock) {
             if (!mayAcceptTasks)
                 return false;
             if (task == POISON_PILL)
                 mayAcceptTasks = false;
-            tasks.add(task);
-            tasks.notify();
         }
+        tasks.put(task);
         return true;
     }
-
 
 }

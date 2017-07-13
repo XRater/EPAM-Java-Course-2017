@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class NetServer {
 
-    private static final int DEFAULT_PORT = 10000;
+    public static final int DEFAULT_PORT = 10000;
 
     public static void main(String[] args) {
 
@@ -21,9 +21,7 @@ public class NetServer {
                 Socket socket = serverSocket.accept(); //waiting for connection
                 System.out.println("Got connection" + socket);
 
-                new Thread(() -> {
-                    processConnection(socket);
-                }).start();
+                new Thread(() -> processConnection(socket)).start();
             }
 
         } catch (IOException e) {

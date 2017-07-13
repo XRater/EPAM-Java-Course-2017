@@ -1,15 +1,17 @@
-package p110717;
+package p130717;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 @SuppressWarnings("SynchronizeOnNonFinalField")
-public class WorkerThread {
+public class WorkerThreadWithShutDown {
 
+    private final Thread thread;
     private Queue<Runnable> tasks = new LinkedList<>();
 
-    public WorkerThread() {
-        new Thread(this::process).start();
+    public WorkerThreadWithShutDown() {
+        thread = new Thread(this::process);
+        thread.start();
     }
 
     public void submit(Runnable task) {
@@ -17,6 +19,11 @@ public class WorkerThread {
             tasks.add(task);
             tasks.notify();
         }
+    }
+
+    public void shutdown() {
+//        thread.stop(); BAD!
+        thread.interrupt();
     }
 
     private void process() {
