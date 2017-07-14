@@ -1,6 +1,6 @@
 package ClassWork.p140717.inheritance;
 
-public class B {
+public class B extends A {
 
 
 }

@@ -10,11 +10,11 @@ public class StringArrayList {
     static private String[] data_ = new String[DEFAULT_SIZE];
 
 
-    public static String get(int index) {
+    public String get(int index) {
         return data_[index];
     }
 
-    public static void set(int index, String string) {
+    public void set(int index, String string) {
         data_[index] = string;
     }
 
@@ -24,6 +24,12 @@ public class StringArrayList {
 
     boolean isEmpty() {
         return size_ == 0;
+    }
+
+
+    public void clear() {
+        Arrays.fill(data_, null);
+        size_ = 0;
     }
 
 
@@ -51,7 +57,6 @@ public class StringArrayList {
             }
     }
 
-
     @Override
     public String toString() {
         if (size_ == 0)
@@ -62,12 +67,11 @@ public class StringArrayList {
         sb.append('[');
 
         for (int i = 0; i < size_ - 1; i++)
-            sb.append(data_[i].toString() + ", ");
+            sb.append(data_[i]).append(", ");
 
-        sb.append(data_[size_ - 1].toString());
+        sb.append(data_[size_ - 1]);
         sb.append(']');
 
         return sb.toString();
     }
-
 }

@@ -1,6 +1,10 @@
 package ClassWork.p140717.inheritance2;
 
-public class Hamster {
+final public class Hamster extends Rodent {
 
+    @Override
+    protected void eat() {
+        System.out.println("chom-chom");
+    }
 
 }

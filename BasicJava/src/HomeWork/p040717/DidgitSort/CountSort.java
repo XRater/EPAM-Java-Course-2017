@@ -1,8 +1,10 @@
-package HomeWork.p040717;
+package HomeWork.p040717.DidgitSort;
+
+import HomeWork.p040717.DidgitSort.DigitHolder;
 
 import java.util.Arrays;
 
-import static HomeWork.p040717.SortsTest.testRadixSort;
+import static HomeWork.p040717.DidgitSort.SortsTest.testRadixSort;
 
 public class CountSort {
 

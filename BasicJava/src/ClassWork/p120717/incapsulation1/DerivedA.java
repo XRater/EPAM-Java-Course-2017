@@ -6,7 +6,7 @@ public class DerivedA extends   A{
 
     public static void main(String[] args) {
 
-//        A a = new A();
+//        Sample a = new Sample();
 
 //        a.i = 0;
 //        a.j = 0;

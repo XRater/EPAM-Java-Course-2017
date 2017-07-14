@@ -1,6 +1,9 @@
 package ClassWork.p140717.hiding;
 
-public class Hiding {
+public class First {
 
+    static void X() {
+        System.out.println("first");
+    }
 
 }

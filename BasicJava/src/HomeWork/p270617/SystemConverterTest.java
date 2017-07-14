@@ -32,7 +32,7 @@ public class SystemConverterTest {
 
         Asserts.assertEquals(SystemConverter.toHexString(0), "0");
         Asserts.assertEquals(SystemConverter.toHexString(1), "1");
-        Asserts.assertEquals(SystemConverter.toHexString(10), "A");
+        Asserts.assertEquals(SystemConverter.toHexString(10), "Sample");
         Asserts.assertEquals(SystemConverter.toHexString(16), "10");
         Asserts.assertEquals(SystemConverter.toHexString(171), "AB");
 

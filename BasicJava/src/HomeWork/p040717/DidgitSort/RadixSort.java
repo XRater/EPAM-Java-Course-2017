@@ -1,6 +1,6 @@
-package HomeWork.p040717;
+package HomeWork.p040717.DidgitSort;
 
-import static HomeWork.p040717.SortsTest.testRadixSort;
+import static HomeWork.p040717.DidgitSort.SortsTest.testRadixSort;
 
 public class RadixSort {
 

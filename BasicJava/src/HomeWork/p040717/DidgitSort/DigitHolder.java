@@ -1,4 +1,4 @@
-package HomeWork.p040717;
+package HomeWork.p040717.DidgitSort;
 
 import TestFramework.Asserts;
 
