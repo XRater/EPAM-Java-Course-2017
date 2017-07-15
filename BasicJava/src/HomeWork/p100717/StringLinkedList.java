@@ -1,4 +1,6 @@
-package ClassWork.p100717;
+package HomeWork.p100717;
+
+import ClassWork.p100717.StringLinkedListUse;
 
 public class StringLinkedList {
 
@@ -56,6 +58,33 @@ public class StringLinkedList {
         return result;
     }
 
+    public String remove(int index) {
+        if (index < 0 || index >= size_)
+            return null;
+
+        String extractedValue = null;
+        if (index == 0) {
+            extractedValue = head.getValue();
+            head = head.getNext();
+        } else {
+
+            int i = 0;
+            Node node = head;
+            while (i < index - 1) {
+                i++;
+                node = node.getNext();
+            }
+
+            Node toExtract = node.getNext();
+            extractedValue = toExtract.getValue();
+            node.setNext(toExtract.getNext());
+        }
+
+        size_--;
+
+        return extractedValue;
+    }
+
 
     @Override
     public String toString() {
@@ -69,7 +98,7 @@ public class StringLinkedList {
 
         //traverse
         for (Node node = head.getNext(); node != null; node = node.getNext())
-            sb.append(", " + node.getValue());
+            sb.append(", ").append(node.getValue());
 
         sb.append(']');
 

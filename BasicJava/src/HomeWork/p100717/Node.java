@@ -1,4 +1,4 @@
-package ClassWork.p100717;
+package HomeWork.p100717;
 
 class Node {
 

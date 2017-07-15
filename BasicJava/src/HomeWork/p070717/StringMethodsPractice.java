@@ -1,40 +1,36 @@
-package ClassWork.p070717;
+package HomeWork.p070717;
 
 import TestFramework.Asserts;
+
+import java.util.ArrayList;
 
 public class StringMethodsPractice {
 
     public static void main(String[] args) {
-
-        String s = "   Hello ";
-        String s2 = "Hello";
-        String s3 = "   Hello";
-        String s4 = "Hello  ";
-        String s5 = " He  l lo ";
-        String s6 = "";
-
-        Asserts.assertEquals(trim(s), "Hello");
-        Asserts.assertEquals(trim(s2), "Hello");
-        Asserts.assertEquals(trim(s3), "Hello");
-        Asserts.assertEquals(trim(s4), "Hello");
-        Asserts.assertEquals(trim(s5), "He  l lo");
-        Asserts.assertEquals(trim(s6), "");
-        trim(s4);
+        testTrim();
+        testReplace();
     }
 
-    private static String trim(String s) {
-        if (s == null || s.length() == 0)
-            return s;
-        if (s.indexOf(' ') == -1)
-            return s;
+    private static void testReplace() {
+        Asserts.assertEquals(StringMethods.replace("Hello", 'l', ' '), "He  o");
+        Asserts.assertEquals(StringMethods.replace("", 'a', 'b'), "");
+        Asserts.assertEquals(StringMethods.replace("aaa", 'a', 'b'), "bbb");
+        Asserts.assertEquals(StringMethods.replace("abacaba", 'a', 'a'), "abacaba");
+        Asserts.assertEquals(StringMethods.replace("abacaba", 'a', 'b'), "bbbcbbb");
+        Asserts.assertEquals(StringMethods.replace("Hi there!", 'l', 'i'), "Hi there!");
+    }
 
-        int begin = 0;
-        int end = s.length() - 1;
+    private static void testTrim() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("  Hello ");
+        list.add("Hello");
+        list.add("   Hello");
+        list.add("Hello ");
+        list.add("  H el lo ");
+        list.add("");
 
-        while (s.charAt(begin++) <= ' ') {}
-        while (s.charAt(end--) <= ' ') {}
-
-        return s.substring(begin - 1, end + 2);
+        for (String string : list)
+            Asserts.assertEquals(StringMethods.trim(string), string.trim());
     }
 
 }
