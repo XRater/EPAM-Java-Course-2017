@@ -7,6 +7,7 @@ public class Messenger {
 
     static Communicator chat;
     private static JTextArea textArea;
+    private static JScrollPane sp;
 
     public static void main(String[] args) {
 
@@ -17,11 +18,14 @@ public class Messenger {
         LayoutManager manager = new BorderLayout();
 
         JPanel panel = new JPanel(manager);
+//        panel.setPreferredSize(new Dimension(400, 600));
 
         textArea = new JTextArea();
         textArea.setEditable(false);
 
-        panel.add(textArea, BorderLayout.CENTER);
+        sp = new JScrollPane(textArea);
+
+        panel.add(sp, BorderLayout.CENTER);
 
         JPanel inputPanel = new JPanel();
 
@@ -61,6 +65,7 @@ public class Messenger {
 
     private static void placeText(String text) {
         textArea.append(text + '\n');
+        textArea.setCaretPosition(textArea.getDocument().getLength());
     }
 
 }

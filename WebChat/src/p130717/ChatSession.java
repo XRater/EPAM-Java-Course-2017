@@ -8,9 +8,17 @@ import java.util.function.Consumer;
 
 public class ChatSession {
 
+    private long delay;
+
+    public ChatSession(long delay) {
+        this.delay = delay;
+    }
+
     private PrintWriter writer;
 
-    void processConnection(Socket socket, Consumer<String> broadcaster) {
+    void processConnection(Socket socket,
+                           Consumer<String> broadcaster,
+                           Consumer<ChatSession> sessionRemover) {
         try {
             Scanner scanner = new Scanner(socket.getInputStream());
             writer = new PrintWriter(socket.getOutputStream());
@@ -24,6 +32,7 @@ public class ChatSession {
             }
 
             socket.close();
+            sessionRemover.accept(this);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -31,6 +40,12 @@ public class ChatSession {
     }
 
     public void sendToClient(String line) {
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         writer.println(" > " + line);
         writer.flush();
     }

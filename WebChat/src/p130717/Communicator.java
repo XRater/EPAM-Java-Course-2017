@@ -37,20 +37,4 @@ class Communicator {
         writer.flush();
     }
 
-    public static void main(String[] args) {
-
-        Communicator chat = new Communicator();
-        Scanner keyboardScanner = new Scanner(System.in);
-
-        chat.init(System.out::println);
-
-        new Thread( () -> {
-            while (keyboardScanner.hasNextLine()) {
-                String line = keyboardScanner.nextLine();
-                chat.sendTextToServer(line);
-            }
-        }).start();
-
-    }
-
 }
