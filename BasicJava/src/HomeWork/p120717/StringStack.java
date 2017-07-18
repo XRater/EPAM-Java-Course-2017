@@ -31,6 +31,16 @@ public class StringStack {
     public String toString() {
         if (size_ == 0)
             return "[]";
-        return "";
+
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+
+        sb.append(data_[0]);
+        for (int i = 1; i < size_; i++)
+            sb.append(", ").append(data_[i]);
+
+        sb.append(']');
+
+        return sb.toString();
     }
 }
