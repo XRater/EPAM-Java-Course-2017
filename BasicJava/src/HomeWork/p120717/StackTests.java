@@ -75,7 +75,7 @@ public class StackTests {
         Asserts.assertEquals(stack.pop(), "three");
         Asserts.assertEquals(stack.pop(), "two");
         Asserts.assertEquals(stack.pop(), "one");
-        Asserts.assertEquals(stack.pop(), null);
+        Asserts.assertEquals(stack.pop(), "null");
     }
 
 }

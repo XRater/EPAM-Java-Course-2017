@@ -36,6 +36,12 @@ public class StringStack {
         return true;
     }
 
+    public String pop() {
+        if (size == 0)
+            return null;
+        return data[--size];
+    }
+
     @Override
     public String toString() {
         if (size == 0)
@@ -51,9 +57,5 @@ public class StringStack {
         sb.append(']');
 
         return sb.toString();
-    }
-
-    public String pop() {
-        return "";
     }
 }
