@@ -5,46 +5,48 @@ public class StringStack {
     private static final int DEFAULT_MAX_SIZE = 10;
 
     private final int maxSize;
-    private int size_;
+    private int size;
 
-    String[] data_;
+    String[] data;
 
     public StringStack() {
         maxSize = DEFAULT_MAX_SIZE;
-        data_ = new String[maxSize];
-        size_ = 0;
+        data = new String[maxSize];
+        size = 0;
     }
 
     public StringStack(int size) {
         maxSize = size;
-        data_ = new String[maxSize];
-        size_ = 0;
+        data = new String[maxSize];
+        this.size = 0;
     }
 
     public boolean isEmpty() {
-        return size_ == 0;
+        return size == 0;
     }
 
     public int getSize() {
-        return size_;
+        return size;
     }
 
     public boolean push(String s) {
-        data_[size_++] = s;
+        if (size == maxSize)
+            return false;
+        data[size++] = s;
         return true;
     }
 
     @Override
     public String toString() {
-        if (size_ == 0)
+        if (size == 0)
             return "[]";
 
         StringBuilder sb = new StringBuilder();
         sb.append('[');
 
-        sb.append(data_[0]);
-        for (int i = 1; i < size_; i++)
-            sb.append(", ").append(data_[i]);
+        sb.append(data[0]);
+        for (int i = 1; i < size; i++)
+            sb.append(", ").append(data[i]);
 
         sb.append(']');
 
