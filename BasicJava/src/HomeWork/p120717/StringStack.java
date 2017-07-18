@@ -52,4 +52,8 @@ public class StringStack {
 
         return sb.toString();
     }
+
+    public String pop() {
+        return "";
+    }
 }
