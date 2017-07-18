@@ -8,6 +8,7 @@ public class Messenger {
     static Communicator chat;
     private static JTextArea textArea;
     private static JScrollPane sp;
+    private static List list;
 
     public static void main(String[] args) {
 
@@ -18,7 +19,7 @@ public class Messenger {
         LayoutManager manager = new BorderLayout();
 
         JPanel panel = new JPanel(manager);
-//        panel.setPreferredSize(new Dimension(400, 600));
+        panel.setPreferredSize(new Dimension(400, 600));
 
         textArea = new JTextArea();
         textArea.setEditable(false);
@@ -45,6 +46,11 @@ public class Messenger {
 
         panel.add(inputPanel, BorderLayout.SOUTH);
 
+        list = new List(10, false);
+        List userList = list;
+
+        panel.add(userList, BorderLayout.WEST);
+
         panel.setPreferredSize(new Dimension(400, 400));
 
         frame.add(panel);
@@ -64,6 +70,10 @@ public class Messenger {
     }
 
     private static void placeText(String text) {
+        if (text.startsWith("/name")) {
+            String[] words;
+            //FIXME
+        }
         textArea.append(text + '\n');
         textArea.setCaretPosition(textArea.getDocument().getLength());
     }

@@ -8,9 +8,11 @@ import java.util.function.Consumer;
 
 public class ChatSession {
 
+    private String name;
     private long delay;
 
-    public ChatSession(long delay) {
+    public ChatSession(String name, long delay) {
+        this.name = name;
         this.delay = delay;
     }
 
@@ -26,7 +28,7 @@ public class ChatSession {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 System.out.println(line);
-                broadcaster.accept(line);
+                broadcaster.accept(name + " > " + line);
                 if (line.equals("bye"))
                     break;
             }
@@ -46,7 +48,7 @@ public class ChatSession {
             e.printStackTrace();
         }
 
-        writer.println(" > " + line);
+        writer.println(line);
         writer.flush();
     }
 }

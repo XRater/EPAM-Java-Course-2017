@@ -13,6 +13,7 @@ class ChatServer {
     static final int DEFAULT_PORT = 10000;
     private static List<ChatSession> sessions;
     private static ExecutorService broadcastService;
+    private static int counter = 0;
 
     public static void main(String[] args) {
 
@@ -31,7 +32,8 @@ class ChatServer {
 
                 new Thread(() -> {
                     long delay = sessions.size() == 0 ? 2000 : 100;
-                    ChatSession chatSession = new ChatSession(delay);
+                    String name = "Anonymous" + ++counter;
+                    ChatSession chatSession = new ChatSession(name, delay);
                     sessions.add(chatSession);
 
                     chatSession.processConnection(socket,
