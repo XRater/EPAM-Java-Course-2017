@@ -66,6 +66,16 @@ public class StackTests {
     }
 
     private static void test_pop() {
+        StringStack stack = new StringStack();
+
+        stack.push("one");
+        stack.push("two");
+        stack.push("three");
+
+        Asserts.assertEquals(stack.pop(), "three");
+        Asserts.assertEquals(stack.pop(), "two");
+        Asserts.assertEquals(stack.pop(), "one");
+        Asserts.assertEquals(stack.pop(), null);
     }
 
 }
