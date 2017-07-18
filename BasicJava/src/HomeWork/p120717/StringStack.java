@@ -15,6 +15,12 @@ public class StringStack {
         size_ = 0;
     }
 
+    public StringStack(int size) {
+        maxSize = size;
+        data_ = new String[maxSize];
+        size_ = 0;
+    }
+
     public boolean isEmpty() {
         return size_ == 0;
     }
@@ -23,8 +29,9 @@ public class StringStack {
         return size_;
     }
 
-    public void push(String s) {
+    public boolean push(String s) {
         data_[size_++] = s;
+        return true;
     }
 
     @Override
