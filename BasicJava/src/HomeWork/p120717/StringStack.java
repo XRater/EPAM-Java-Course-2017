@@ -24,11 +24,13 @@ public class StringStack {
     }
 
     public void push(String s) {
-
+        data_[size_++] = s;
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        if (size_ == 0)
+            return "[]";
+        return "";
     }
 }
