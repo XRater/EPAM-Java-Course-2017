@@ -1,4 +1,4 @@
-package ClassWork.p170717.solitare;
+package HomeWork.p170717.solitare;
 
 class DeckPile extends CardPile {
 
@@ -12,7 +12,7 @@ class DeckPile extends CardPile {
         int count = 0;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j <= 12; j++) {
-                pileOne.push(new Card(i, j));
+                pileOne.join(new Card(i, j));
                 count++;
             }
         }
@@ -21,22 +21,22 @@ class DeckPile extends CardPile {
             int limit = ((int) (Math.random() * 1000)) % count;
             // move down to a random location
             for (int i = 0; i < limit; i++) {
-                pileTwo.push(pileOne.pop());
+                pileTwo.join(pileOne.pop());
             }
             // then add the card found there
-            push(pileOne.pop());
+            join(pileOne.pop());
             // then put the decks back together
             while (!pileTwo.empty()) {
-                pileOne.push(pileTwo.pop());
+                pileOne.join(pileTwo.pop());
             }
         }
     }
 
     @Override
-    public void select(int tx, int ty) {
+    public void select(Card card) {
         if (empty()) {
             return;
         }
-        Solitare.discardPile.push(pop());
+        Solitare.discardPile.join(pop());
     }
 }

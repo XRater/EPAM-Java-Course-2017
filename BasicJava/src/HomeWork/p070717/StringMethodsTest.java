@@ -4,7 +4,7 @@ import TestFramework.Asserts;
 
 import java.util.ArrayList;
 
-public class StringMethodsPractice {
+public class StringMethodsTest {
 
     public static void main(String[] args) {
         testTrim();

@@ -1,4 +1,4 @@
-package ClassWork.p170717.solitare;
+package HomeWork.p170717.solitare;
 
 class DiscardPile extends CardPile {
 
@@ -7,29 +7,29 @@ class DiscardPile extends CardPile {
     }
 
     @Override
-    public void push(Card aCard) {
+    public void join(Card aCard) {
         if (!aCard.isFaceUp()) {
-            aCard.flip();
+            aCard.open();
         }
-        super.push(aCard);
+        super.join(aCard);
     }
 
     @Override
-    public void select(int tx, int ty) {
+    public void select(Card card) {
         if (empty())
             return;
         Card topCard = pop();
         for (int i = 0; i < 4; i++)
             if (Solitare.suitPile[i].canTake(topCard)) {
-                Solitare.suitPile[i].push(topCard);
+                Solitare.suitPile[i].join(topCard);
                 return;
             }
         for (int i = 0; i < 7; i++)
             if (Solitare.tableau[i].canTake(topCard)) {
-                Solitare.tableau[i].push(topCard);
+                Solitare.tableau[i].join(topCard);
                 return;
             }
         // nobody can use it, put it back on our list
-        push(topCard);
+        join(topCard);
     }
 }

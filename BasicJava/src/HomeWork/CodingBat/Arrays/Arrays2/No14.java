@@ -1,6 +1,6 @@
 package HomeWork.CodingBat.Arrays.Arrays2;
 
-public class no14 {
+public class No14 {
 
     public boolean no14(int[] nums) {
         boolean no4 = true;

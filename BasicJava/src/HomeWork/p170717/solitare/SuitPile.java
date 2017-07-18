@@ -1,4 +1,4 @@
-package ClassWork.p170717.solitare;
+package HomeWork.p170717.solitare;
 
 class SuitPile extends CardPile {
 

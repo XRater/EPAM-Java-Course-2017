@@ -1,19 +1,11 @@
-package p110717;
+package p130717;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.LayoutManager;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
+import javax.swing.*;
+import java.awt.*;
 
 public class Messenger {
 
-    static ChatClient chat;
+    static Communicator chat;
     private static JTextArea textArea;
 
     public static void main(String[] args) {
@@ -57,7 +49,7 @@ public class Messenger {
 
         frame.setVisible(true);
 
-        chat = new ChatClient();
+        chat = new Communicator();
         chat.init(Messenger::placeText);
     }
 

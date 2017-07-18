@@ -1,4 +1,4 @@
-package ClassWork.p170717.solitare;
+package HomeWork.p170717.solitare;
 
 /*
 Simple Solitare Card Game in Java
@@ -43,9 +43,11 @@ public class Solitare extends Applet {
 
     @Override
     public boolean mouseDown(Event evt, int x, int y) {
+        Card card = null;
         for (int i = 0; i < 13; i++) {
-            if (allPiles[i].includes(x, y)) {
-                allPiles[i].select(x, y);
+            card = allPiles[i].getCard(x, y);
+            if (card != null) {
+                allPiles[i].select(card);
                 repaint();
                 return true;
             }

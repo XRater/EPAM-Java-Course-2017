@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 
 import static p130717.ChatServer.DEFAULT_PORT;
 
-class ChatClient {
+class Communicator {
 
     PrintWriter writer;
 
@@ -39,7 +39,7 @@ class ChatClient {
 
     public static void main(String[] args) {
 
-        ChatClient chat = new ChatClient();
+        Communicator chat = new Communicator();
         Scanner keyboardScanner = new Scanner(System.in);
 
         chat.init(System.out::println);
