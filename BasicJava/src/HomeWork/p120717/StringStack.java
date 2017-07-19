@@ -10,9 +10,7 @@ public class StringStack {
     String[] data;
 
     public StringStack() {
-        maxSize = DEFAULT_MAX_SIZE;
-        data = new String[maxSize];
-        size = 0;
+        this(DEFAULT_MAX_SIZE);
     }
 
     public StringStack(int size) {
@@ -45,7 +43,10 @@ public class StringStack {
     public String pop() {
         if (size == 0)
             return null;
-        return data[--size];
+
+        String answer = top();
+        data[--size] = null;
+        return answer;
     }
 
     @Override
