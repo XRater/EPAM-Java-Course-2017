@@ -29,6 +29,10 @@ public class StringStack {
         return size;
     }
 
+    public String top() {
+        return null;
+    }
+
     public boolean push(String s) {
         if (size == maxSize)
             return false;
