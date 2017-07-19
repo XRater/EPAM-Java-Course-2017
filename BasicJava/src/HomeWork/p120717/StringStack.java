@@ -30,7 +30,9 @@ public class StringStack {
     }
 
     public String top() {
-        return null;
+        if (size == 0)
+            return null;
+        return data[size - 1];
     }
 
     public boolean push(String s) {
