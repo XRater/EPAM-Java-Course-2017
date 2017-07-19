@@ -9,6 +9,7 @@ public class StackTests {
         test_basic();
         test_push();
         test_pop();
+        test_top();
 
     }
 
@@ -77,5 +78,24 @@ public class StackTests {
         Asserts.assertEquals(stack.pop(), "one");
         Asserts.assertEquals(stack.pop(), "null");
     }
+
+    private static void test_top() {
+        StringStack stack = new StringStack();
+
+        Asserts.assertEquals(stack.top(), "null");
+
+        stack.push("one");
+        Asserts.assertEquals(stack.top(), "one");
+
+        stack.push("two");
+        Asserts.assertEquals(stack.top(), "two");
+
+        stack.pop();
+        Asserts.assertEquals(stack.top(), "one");
+
+        stack.pop();
+        Asserts.assertEquals(stack.top(), "null");
+    }
+
 
 }
