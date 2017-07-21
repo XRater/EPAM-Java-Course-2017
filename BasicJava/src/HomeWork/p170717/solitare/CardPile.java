@@ -25,11 +25,13 @@ class CardPile {
 
     public void join(Card aCard) {
         aCard.next = firstCard;
-        if (firstCard != null)
+        if (firstCard != null) {
             firstCard.prev = aCard;
+        }
         firstCard = aCard;
-        while (firstCard.prev != null)
+        while (firstCard.prev != null) {
             firstCard = firstCard.prev;
+        }
     }
 
     public Card pop() {
@@ -37,21 +39,28 @@ class CardPile {
     }
 
     public Card split(Card card) {
-        if (card == null)
+        if (card == null) {
             return null;
+        }
         // change links
         firstCard = card.next;
-        if (firstCard != null)
+        if (firstCard != null) {
             firstCard.prev = null;
+        }
         card.next = null;
         return card;
     }
 
-//    public boolean includes(int tx, int ty) {
-//    }
-
     public void select(Card card) {
-        // do nothing
+        if (CardHolder.isHoldingCard()) {
+            if (canTake(CardHolder.getCard())) {
+                CardHolder.move(this);
+            } else {
+                CardHolder.unhold();
+            }
+        } else {
+            CardHolder.hold(this, card);
+        }
     }
 
     public void display(Graphics g) {
@@ -70,8 +79,14 @@ class CardPile {
 
     public Card getCard(int xCoord, int yCoord) {
         if (x <= xCoord && xCoord <= x + Constants.CARD_WIDTH &&
-                y <= yCoord && yCoord <= y + Constants.CARD_HEIGHT)
+                y <= yCoord && yCoord <= y + Constants.CARD_HEIGHT) {
             return top();
+        }
         return null;
+    }
+
+    public boolean inside(int xCoord, int yCoord) {
+        return xCoord >= x && xCoord <= x + Constants.CARD_WIDTH &&
+                yCoord >= y && yCoord <= y + Constants.CARD_HEIGHT;
     }
 }

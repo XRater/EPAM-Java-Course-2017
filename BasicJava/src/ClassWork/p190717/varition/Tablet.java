@@ -1,6 +1,9 @@
 package ClassWork.p190717.varition;
 
-public class Tablet {
+class Tablet extends PointingDevice {
 
+    public void d() {
+
+    }
 
 }

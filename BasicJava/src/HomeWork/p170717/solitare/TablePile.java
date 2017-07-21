@@ -25,39 +25,69 @@ class TablePile extends CardPile {
                 (aCard.getRank() == topCard.getRank() - 1);
     }
 
-//    @Override
-//    public boolean includes(int tx, int ty) {
-//        // don't test bottom of card
-//        return x <= tx && tx <= x + Constants.CARD_WIDTH &&
-//                y <= ty;
-//    }
+    @Override
+    public Card getCard(int xCoord, int yCoord) {
+        Card card = top();
+
+        if (xCoord < x || xCoord > x + Constants.CARD_WIDTH || yCoord < y || card == null) {
+            return null;
+        }
+        // move down to the last card
+        while (card.next != null) {
+            card = card.next;
+        }
+
+        //move up while we are out of card
+        int cardY = y;
+        while (yCoord > cardY + 35 && card.prev != null) {
+            card = card.prev;
+            cardY += 35;
+        }
+
+        if (!card.isFaceUp()) {
+            return null;
+        }
+        if (yCoord > cardY + Constants.CARD_HEIGHT) {
+            return null;
+        }
+
+        return card;
+    }
+
+    @Override
+    public Card split(Card card) {
+        Card resultCard = super.split(card);
+        if (!empty()) {
+            top().open();
+        }
+        return resultCard;
+    }
 
     @Override
     public void select(Card card) {
-        if (empty()) {
-            return;
-        }
-
-        Card topCard = top();
-        // else see if any getSuit pile can take card
-        for (int i = 0; i < 4; i++) {
-            if (Solitare.suitPile[i].canTake(topCard)) {
-                Solitare.suitPile[i].join(split(topCard));
-                if (top() != null)
-                    top().open();
-                return;
+        if (CardHolder.isHoldingCard()) {
+            if (canTake(CardHolder.getCard())) {
+                CardHolder.move(this);
+            } else {
+                CardHolder.unhold();
+            }
+        } else {
+            if (card != null) {
+                CardHolder.hold(this, card);
+            } else {
+                CardHolder.unhold();
             }
         }
+    }
 
-        // else see if any other table pile can take card
-        for (int i = 0; i < 7; i++) {
-            if (Solitare.tableau[i].canTake(topCard)) {
-                Solitare.tableau[i].join(split(topCard));
-                if (top() != null)
-                    top().open();
-                return;
-            }
+    @Override
+    public boolean inside(int xCoord, int yCoord) {
+        int size = 0;
+        for (Card card = top(); card != null; card = card.next) {
+            size++;
         }
+        return xCoord >= x && xCoord <= x + Constants.CARD_WIDTH &&
+                yCoord >= y && yCoord <= y + (size - 1) * 35 + Constants.CARD_HEIGHT;
     }
 
     private int stackDisplay(Graphics g, Card aCard) {

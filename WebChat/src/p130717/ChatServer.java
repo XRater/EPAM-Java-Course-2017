@@ -31,12 +31,8 @@ class ChatServer {
                 System.out.println("Got connection" + socket);
 
                 new Thread(() -> {
-                    long delay = sessions.size() == 0 ? 2000 : 100;
-                    String name = "Anonymous" + ++counter;
-                    ChatSession chatSession = new ChatSession(name, delay);
-                    sessions.add(chatSession);
-
-                    chatSession.processConnection(socket,
+                    ChatSession chatSession = createNewSession(socket);
+                    chatSession.processConnection(
                             ChatServer::broadcast,
                             ChatServer::removeSession);
                 }).start();
@@ -46,14 +42,37 @@ class ChatServer {
         }
     }
 
+    private static ChatSession createNewSession(Socket socket) {
+        String name = "User" + ++counter;
+        ChatSession chatSession = new ChatSession(socket, name, 0);
+        broadcastUserName(chatSession);
+        sessions.add(chatSession);
+        sendNameListToClient(chatSession);
+        return chatSession;
+    }
+
+    private static void broadcastUserName(ChatSession chatSession) {
+        String command = "/add " + chatSession.getClientName();
+        broadcast(command);
+    }
+
+    private static void sendNameListToClient(ChatSession chatSession) {
+        StringBuilder nameList = new StringBuilder("/list");
+        for (ChatSession session : sessions) {
+            nameList.append(" ").append(session.getClientName());
+        }
+        chatSession.sendToClient(nameList.toString());
+    }
+
     private static void broadcast(String line) {
-        for (ChatSession session: sessions) {
-            broadcastService.execute( () -> session.sendToClient(line));
+        for (ChatSession session : sessions) {
+            broadcastService.execute(() -> session.sendToClient(line));
         }
     }
 
     private static void removeSession(ChatSession session) {
         sessions.remove(session);
+        broadcast("/remove " + session.getClientName());
     }
 
 }

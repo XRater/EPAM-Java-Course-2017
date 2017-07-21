@@ -1,6 +1,13 @@
 package ClassWork.p190717.vehiles;
 
-public class ColoredTruck {
+import java.awt.*;
 
+public class ColoredTruck extends Truck {
+
+    Color color;
+
+    public ColoredTruck(Color color) {
+        this.color = color;
+    }
 
 }

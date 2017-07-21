@@ -1,6 +1,7 @@
-package ClassWork.p190717;
+package ClassWork.p190717.vehiles;
 
-public class Vehile {
+abstract public class Vehile {
 
+    public abstract void move(int x, int y);
 
 }

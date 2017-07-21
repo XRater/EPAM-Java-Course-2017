@@ -16,20 +16,26 @@ class DiscardPile extends CardPile {
 
     @Override
     public void select(Card card) {
-        if (empty())
-            return;
-        Card topCard = pop();
-        for (int i = 0; i < 4; i++)
-            if (Solitare.suitPile[i].canTake(topCard)) {
-                Solitare.suitPile[i].join(topCard);
-                return;
-            }
-        for (int i = 0; i < 7; i++)
-            if (Solitare.tableau[i].canTake(topCard)) {
-                Solitare.tableau[i].join(topCard);
-                return;
-            }
-        // nobody can use it, put it back on our list
-        join(topCard);
+        if (CardHolder.isHoldingCard()) {
+            CardHolder.unhold();
+        } else {
+            CardHolder.hold(this, card);
+        }
+
+        //        if (empty())
+//            return;
+//        Card topCard = pop();
+//        for (int i = 0; i < 4; i++)
+//            if (Solitare.suitPile[i].canTake(topCard)) {
+//                Solitare.suitPile[i].join(topCard);
+//                return;
+//            }
+//        for (int i = 0; i < 7; i++)
+//            if (Solitare.tableau[i].canTake(topCard)) {
+//                Solitare.tableau[i].join(topCard);
+//                return;
+//            }
+//        // nobody can use it, put it back on our list
+//        join(topCard);
     }
 }

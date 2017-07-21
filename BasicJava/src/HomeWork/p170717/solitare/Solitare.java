@@ -17,6 +17,8 @@ public class Solitare extends Applet {
 
     @Override
     public void init() {
+        this.setSize(new Dimension(400, 500));
+
         // first allocate the arrays
         allPiles = new CardPile[13];
         suitPile = new SuitPile[4];
@@ -43,15 +45,15 @@ public class Solitare extends Applet {
 
     @Override
     public boolean mouseDown(Event evt, int x, int y) {
-        Card card = null;
         for (int i = 0; i < 13; i++) {
-            card = allPiles[i].getCard(x, y);
-            if (card != null) {
-                allPiles[i].select(card);
+            if (allPiles[i].inside(x, y)) {
+                allPiles[i].select(allPiles[i].getCard(x, y));
                 repaint();
                 return true;
             }
         }
+        CardHolder.unhold();
+        repaint();
         return true;
     }
 }

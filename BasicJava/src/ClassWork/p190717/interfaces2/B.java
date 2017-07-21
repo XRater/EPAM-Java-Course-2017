@@ -1,6 +1,6 @@
 package ClassWork.p190717.interfaces2;
 
-class B {
+class B extends A implements Y {
 
 
 }

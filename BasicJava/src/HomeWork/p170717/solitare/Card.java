@@ -16,6 +16,7 @@ class Card {
     private int rank;
     private int suit;
 
+    private boolean holded;
     private boolean faceup;
     Card next = null;
     Card prev = null;
@@ -25,6 +26,7 @@ class Card {
         suit = suitValue;
         rank = rankValue;
         faceup = false;
+        holded = false;
     }
 
     // access attributes of card
@@ -40,6 +42,10 @@ class Card {
         return faceup;
     }
 
+    public boolean isFront() {
+        return prev == null;
+    }
+
     public int getColor() {
         return getSuit() == heart || getSuit() == diamond ?
                 Constants.RED : Constants.BLACK;
@@ -50,12 +56,27 @@ class Card {
         faceup = true;
     }
 
+    public void hold() {
+        holded = true;
+    }
+
+    public void unhold() {
+        holded = false;
+    }
+
+    @Override
+    public String toString() {
+        return CARD_NAMES[getRank()] + getSuit();
+    }
+
     // drawing
     public void draw(Graphics g, int x, int y) {
         CardPainter painter = new CardPainter(g);
 
         // clear rectangle, draw border
-        painter.drawEmptyCard(x, y);
+        g.clearRect(x, y, Constants.CARD_WIDTH, Constants.CARD_HEIGHT);
+        g.setColor(holded ? Color.blue : Color.black);
+        g.drawRect(x, y, Constants.CARD_WIDTH, Constants.CARD_HEIGHT);
 
         // draw body of card
         if (isFaceUp()) {
@@ -77,6 +98,9 @@ class Card {
                     break;
             }
         } else // face down
+        {
+            //TODO do something with it
             painter.drawFaceDown(x, y);
+        }
     }
 }

@@ -1,6 +1,6 @@
 package ClassWork.p190717.vehiles;
 
-public class Truck {
+public class Truck extends Automobile {
 
 
 }

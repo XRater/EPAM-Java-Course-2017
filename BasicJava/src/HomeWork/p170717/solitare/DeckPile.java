@@ -35,6 +35,11 @@ class DeckPile extends CardPile {
     @Override
     public void select(Card card) {
         if (empty()) {
+
+            return;
+        }
+        if (CardHolder.isHoldingCard()) {
+            CardHolder.unhold();
             return;
         }
         Solitare.discardPile.join(pop());

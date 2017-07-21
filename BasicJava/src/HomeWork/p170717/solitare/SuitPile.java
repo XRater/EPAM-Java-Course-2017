@@ -8,6 +8,9 @@ class SuitPile extends CardPile {
 
     @Override
     public boolean canTake(Card aCard) {
+        if (!aCard.isFront()) {
+            return false;
+        }
         if (empty()) {
             return aCard.getRank() == 0;
         }
@@ -15,4 +18,5 @@ class SuitPile extends CardPile {
         return (aCard.getSuit() == topCard.getSuit()) &&
                 (aCard.getRank() == 1 + topCard.getRank());
     }
+
 }

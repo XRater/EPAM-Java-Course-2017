@@ -11,6 +11,8 @@ public class LockExamples {
 
         Lock lock = new ReentrantLock();
 
+//        lock.
+
         new Thread(() -> {
             lock.lock();
             try {
