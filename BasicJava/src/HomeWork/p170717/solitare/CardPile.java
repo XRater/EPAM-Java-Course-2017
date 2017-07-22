@@ -65,9 +65,8 @@ class CardPile {
 
     public void display(Graphics g) {
         CardPainter painter = new CardPainter(g);
-        painter.setColor(Constants.BLACK);
         if (firstCard == null) {
-            painter.drawEmptyCard(x, y);
+            painter.drawEmptyCard(Constants.BLACK, x, y);
         } else {
             firstCard.draw(g, x, y);
         }
@@ -88,5 +87,18 @@ class CardPile {
     public boolean inside(int xCoord, int yCoord) {
         return xCoord >= x && xCoord <= x + Constants.CARD_WIDTH &&
                 yCoord >= y && yCoord <= y + Constants.CARD_HEIGHT;
+    }
+
+    public void doubleClick(Card card) {
+        if (top() != card) {
+            return;
+        }
+
+        for (int i = 0; i < 4; i++) {
+            if (Solitare.suitPile[i].canTake(card)) {
+                Solitare.suitPile[i].join(pop());
+                return;
+            }
+        }
     }
 }

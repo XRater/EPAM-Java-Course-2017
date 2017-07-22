@@ -7,6 +7,8 @@ Written by Tim Budd, Oregon State University, 1996
 
 import java.applet.Applet;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Solitare extends Applet {
     static DeckPile deckPile;
@@ -34,6 +36,20 @@ public class Solitare extends Applet {
             allPiles[6 + i] = tableau[i] =
                     new TablePile(5 + 55 * i, 80, i + 1);
         }
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+//                    System.out.println("double");
+                    doubleClick(e.getX(), e.getY());
+                } else if (e.getClickCount() == 1) {
+//                    System.out.println("once");
+                    oneClick(e.getX(), e.getY());
+                }
+            }
+        });
+
     }
 
     @Override
@@ -43,8 +59,7 @@ public class Solitare extends Applet {
         }
     }
 
-    @Override
-    public boolean mouseDown(Event evt, int x, int y) {
+    public boolean oneClick(int x, int y) {
         for (int i = 0; i < 13; i++) {
             if (allPiles[i].inside(x, y)) {
                 allPiles[i].select(allPiles[i].getCard(x, y));
@@ -54,6 +69,24 @@ public class Solitare extends Applet {
         }
         CardHolder.unhold();
         repaint();
+        return true;
+    }
+
+    public boolean doubleClick(int x, int y) {
+        System.out.println("hi");
+        if (!CardHolder.isHoldingCard()) {
+//            CardHolder.unhold();
+//            repaint();
+            return true;
+        }
+        CardHolder.unhold();
+        for (int i = 0; i < 13; i++) {
+            if (allPiles[i].inside(x, y)) {
+                allPiles[i].doubleClick(allPiles[i].getCard(x, y));
+                repaint();
+                return true;
+            }
+        }
         return true;
     }
 }

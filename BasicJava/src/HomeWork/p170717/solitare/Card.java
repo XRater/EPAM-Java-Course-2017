@@ -56,6 +56,10 @@ class Card {
         faceup = true;
     }
 
+    public void close() {
+        faceup = false;
+    }
+
     public void hold() {
         holded = true;
     }
@@ -68,15 +72,13 @@ class Card {
     public String toString() {
         return CARD_NAMES[getRank()] + getSuit();
     }
-
     // drawing
+
     public void draw(Graphics g, int x, int y) {
         CardPainter painter = new CardPainter(g);
 
         // clear rectangle, draw border
-        g.clearRect(x, y, Constants.CARD_WIDTH, Constants.CARD_HEIGHT);
-        g.setColor(holded ? Color.blue : Color.black);
-        g.drawRect(x, y, Constants.CARD_WIDTH, Constants.CARD_HEIGHT);
+        painter.drawEmptyCard(holded ? Constants.BLUE : Constants.BLACK, x, y);
 
         // draw body of card
         if (isFaceUp()) {

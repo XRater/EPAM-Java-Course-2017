@@ -58,9 +58,9 @@ class CardPainter {
         g.drawString(name, x + 3, y + 15);
     }
 
-    public void drawEmptyCard(int x, int y) {
+    public void drawEmptyCard(int color, int x, int y) {
         g.clearRect(x, y, Constants.CARD_WIDTH, Constants.CARD_HEIGHT);
-        g.setColor(Color.black);
+        setColor(color);
         g.drawRect(x, y, Constants.CARD_WIDTH, Constants.CARD_HEIGHT);
     }
 
@@ -72,6 +72,8 @@ class CardPainter {
             case Constants.BLACK:
                 g.setColor(Color.black);
                 break;
+            case Constants.BLUE:
+                g.setColor(Color.blue);
         }
     }
 

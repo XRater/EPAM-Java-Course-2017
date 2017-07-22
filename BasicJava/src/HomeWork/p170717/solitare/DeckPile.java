@@ -35,7 +35,11 @@ class DeckPile extends CardPile {
     @Override
     public void select(Card card) {
         if (empty()) {
-
+            while (!Solitare.discardPile.empty()) {
+                Card cardToRemove = Solitare.discardPile.pop();
+                cardToRemove.close();
+                join(cardToRemove);
+            }
             return;
         }
         if (CardHolder.isHoldingCard()) {
@@ -44,4 +48,7 @@ class DeckPile extends CardPile {
         }
         Solitare.discardPile.join(pop());
     }
+
+    @Override
+    public void doubleClick(Card card) {}
 }
