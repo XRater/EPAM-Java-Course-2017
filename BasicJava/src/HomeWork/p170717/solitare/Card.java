@@ -93,7 +93,7 @@ class Card {
                     painter.drawSpade(x, y);
                     break;
                 case diamond:
-                    painter.drawDimond(x, y);
+                    painter.drawDiamond(x, y);
                     break;
                 case club:
                     painter.drawClub(x, y);

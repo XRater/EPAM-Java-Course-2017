@@ -54,6 +54,7 @@ class TablePile extends CardPile {
         return card;
     }
 
+    // We need this override to open top card
     @Override
     public Card split(Card card) {
         Card resultCard = super.split(card);
@@ -63,31 +64,11 @@ class TablePile extends CardPile {
         return resultCard;
     }
 
-    @Override
-    public void select(Card card) {
-        if (CardHolder.isHoldingCard()) {
-            if (canTake(CardHolder.getCard())) {
-                CardHolder.move(this);
-            } else {
-                CardHolder.unhold();
-            }
-        } else {
-            if (card != null) {
-                CardHolder.hold(this, card);
-            } else {
-                CardHolder.unhold();
-            }
-        }
-    }
-
+    // By this implementation we support drop click in any place of column
     @Override
     public boolean inside(int xCoord, int yCoord) {
         int size = 0;
-        for (Card card = top(); card != null; card = card.next) {
-            size++;
-        }
-        return xCoord >= x && xCoord <= x + Constants.CARD_WIDTH &&
-                yCoord >= y && yCoord <= y + (size - 1) * 35 + Constants.CARD_HEIGHT;
+        return xCoord >= x && xCoord <= x + Constants.CARD_WIDTH && yCoord >= y;
     }
 
     private int stackDisplay(Graphics g, Card aCard) {

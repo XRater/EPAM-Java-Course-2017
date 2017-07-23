@@ -23,6 +23,7 @@ class CardPile {
         return firstCard == null;
     }
 
+    // Basic list interface (mostly same for all piles)
     public void join(Card aCard) {
         aCard.next = firstCard;
         if (firstCard != null) {
@@ -51,7 +52,8 @@ class CardPile {
         return card;
     }
 
-    public void select(Card card) {
+    // Click proccessing
+    public void simpleClick(Card card) {
         if (CardHolder.isHoldingCard()) {
             if (canTake(CardHolder.getCard())) {
                 CardHolder.move(this);
@@ -59,37 +61,12 @@ class CardPile {
                 CardHolder.unhold();
             }
         } else {
-            CardHolder.hold(this, card);
+            pick(card);
         }
-    }
-
-    public void display(Graphics g) {
-        CardPainter painter = new CardPainter(g);
-        if (firstCard == null) {
-            painter.drawEmptyCard(Constants.BLACK, x, y);
-        } else {
-            firstCard.draw(g, x, y);
-        }
-    }
-
-    public boolean canTake(Card aCard) {
-        return false;
-    }
-
-    public Card getCard(int xCoord, int yCoord) {
-        if (x <= xCoord && xCoord <= x + Constants.CARD_WIDTH &&
-                y <= yCoord && yCoord <= y + Constants.CARD_HEIGHT) {
-            return top();
-        }
-        return null;
-    }
-
-    public boolean inside(int xCoord, int yCoord) {
-        return xCoord >= x && xCoord <= x + Constants.CARD_WIDTH &&
-                yCoord >= y && yCoord <= y + Constants.CARD_HEIGHT;
     }
 
     public void doubleClick(Card card) {
+        CardHolder.unhold();
         if (top() != card) {
             return;
         }
@@ -99,6 +76,42 @@ class CardPile {
                 Solitare.suitPile[i].join(pop());
                 return;
             }
+        }
+    }
+
+    // Pick and drop related methods
+    public void pick(Card card) {
+        if (card != null) {
+            CardHolder.hold(this, card);
+        } else {
+            CardHolder.unhold();
+        }
+    }
+
+    public boolean canTake(Card aCard) {
+        return false;
+    }
+
+    // Find card by position
+    public boolean inside(int xCoord, int yCoord) {
+        return xCoord >= x && xCoord <= x + Constants.CARD_WIDTH &&
+                yCoord >= y && yCoord <= y + Constants.CARD_HEIGHT;
+    }
+
+    public Card getCard(int xCoord, int yCoord) {
+        if (inside(x, y)) {
+            return top();
+        }
+        return null;
+    }
+
+    // Visual
+    public void display(Graphics g) {
+        CardPainter painter = new CardPainter(g);
+        if (firstCard == null) {
+            painter.drawEmptyCard(Constants.BLACK, x, y);
+        } else {
+            firstCard.draw(g, x, y);
         }
     }
 }

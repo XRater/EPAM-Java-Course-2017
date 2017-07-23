@@ -29,7 +29,7 @@ class CardPainter {
         g.drawLine(x + 30, y + 60, x + 27, y + 45);
     }
 
-    public void drawDimond(int x, int y) {
+    public void drawDiamond(int x, int y) {
         g.drawLine(x + 25, y + 20, x + 40, y + 40);
         g.drawLine(x + 40, y + 40, x + 25, y + 60);
         g.drawLine(x + 25, y + 60, x + 10, y + 40);

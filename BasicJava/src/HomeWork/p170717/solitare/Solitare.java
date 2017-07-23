@@ -41,11 +41,9 @@ public class Solitare extends Applet {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-//                    System.out.println("double");
                     doubleClick(e.getX(), e.getY());
-                } else if (e.getClickCount() == 1) {
-//                    System.out.println("once");
-                    oneClick(e.getX(), e.getY());
+                } else {
+                    simpleClick(e.getX(), e.getY());
                 }
             }
         });
@@ -59,10 +57,10 @@ public class Solitare extends Applet {
         }
     }
 
-    public boolean oneClick(int x, int y) {
+    public boolean simpleClick(int x, int y) {
         for (int i = 0; i < 13; i++) {
             if (allPiles[i].inside(x, y)) {
-                allPiles[i].select(allPiles[i].getCard(x, y));
+                allPiles[i].simpleClick(allPiles[i].getCard(x, y));
                 repaint();
                 return true;
             }
@@ -73,13 +71,6 @@ public class Solitare extends Applet {
     }
 
     public boolean doubleClick(int x, int y) {
-        System.out.println("hi");
-        if (!CardHolder.isHoldingCard()) {
-//            CardHolder.unhold();
-//            repaint();
-            return true;
-        }
-        CardHolder.unhold();
         for (int i = 0; i < 13; i++) {
             if (allPiles[i].inside(x, y)) {
                 allPiles[i].doubleClick(allPiles[i].getCard(x, y));
