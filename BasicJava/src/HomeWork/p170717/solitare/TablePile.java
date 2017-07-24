@@ -32,6 +32,7 @@ class TablePile extends CardPile {
         if (xCoord < x || xCoord > x + Constants.CARD_WIDTH || yCoord < y || card == null) {
             return null;
         }
+
         // move down to the last card
         while (card.next != null) {
             card = card.next;

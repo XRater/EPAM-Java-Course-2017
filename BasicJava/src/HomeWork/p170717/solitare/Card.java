@@ -101,7 +101,6 @@ class Card {
             }
         } else // face down
         {
-            //TODO do something with it
             painter.drawFaceDown(x, y);
         }
     }
