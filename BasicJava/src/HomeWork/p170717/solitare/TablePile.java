@@ -12,12 +12,14 @@ class TablePile extends CardPile {
             join(Solitare.deckPile.pop());
         }
         // open topmost card face up
-        top().open();
+        if (!isEmpty()) {
+            top().open();
+        }
     }
 
     @Override
     public boolean canTake(Card aCard) {
-        if (empty()) {
+        if (isEmpty()) {
             return aCard.getRank() == 12;
         }
         Card topCard = top();
@@ -34,8 +36,8 @@ class TablePile extends CardPile {
         }
 
         // move down to the last card
-        while (card.next != null) {
-            card = card.next;
+        while (card.getNext() != null) {
+            card = card.getNext();
         }
 
         //move up while we are out of card
@@ -59,7 +61,7 @@ class TablePile extends CardPile {
     @Override
     public Card split(Card card) {
         Card resultCard = super.split(card);
-        if (!empty()) {
+        if (!isEmpty()) {
             top().open();
         }
         return resultCard;
@@ -76,7 +78,7 @@ class TablePile extends CardPile {
         if (aCard == null) {
             return y;
         }
-        int localy = stackDisplay(g, aCard.next);
+        int localy = stackDisplay(g, aCard.getNext());
         aCard.draw(g, x, localy);
         return localy + 35;
     }

@@ -5,6 +5,7 @@ class CardHolder {
     static private Card card = null;
     static private CardPile pile = null;
 
+    //access attributes
     public static boolean isHoldingCard() {
         return card != null;
     }

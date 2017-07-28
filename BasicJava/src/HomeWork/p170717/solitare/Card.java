@@ -3,6 +3,9 @@ package HomeWork.p170717.solitare;
 import java.awt.*;
 
 class Card {
+
+//    public static final EmptyCard EMPTY_CARD = new EmptyCard();
+
     // data fields for suits
     final static int heart = 0;
     final static int spade = 1;
@@ -18,8 +21,8 @@ class Card {
 
     private boolean holded;
     private boolean faceup;
-    Card next = null;
-    Card prev = null;
+    private Card next = null;
+    public Card prev = null;
 
     // constructor
     Card(int suitValue, int rankValue) {
@@ -30,6 +33,14 @@ class Card {
     }
 
     // access attributes of card
+    public Card getNext() {
+        return next;
+    }
+
+    public Card getPrev() {
+        return prev;
+    }
+
     public int getRank() {
         return rank;
     }
@@ -51,6 +62,15 @@ class Card {
                 Constants.RED : Constants.BLACK;
     }
 
+    //set attributes of card
+    public void setNext(Card card) {
+        next = card;
+    }
+
+    public void setPrev(Card card) {
+        prev = card;
+    }
+
     // mutations
     public void open() {
         faceup = true;
@@ -68,12 +88,7 @@ class Card {
         holded = false;
     }
 
-    @Override
-    public String toString() {
-        return CARD_NAMES[getRank()] + getSuit();
-    }
     // drawing
-
     public void draw(Graphics g, int x, int y) {
         CardPainter painter = new CardPainter(g);
 
@@ -104,4 +119,58 @@ class Card {
             painter.drawFaceDown(x, y);
         }
     }
+
+
+    //empty card class
+//    private static class EmptyCard extends Card {
+//
+//        EmptyCard() {
+//            super(0, 0);
+//        }
+//
+//        @Override
+//        public int getRank() {
+//            return 0;
+//        }
+//
+//        @Override
+//        public int getSuit() {
+//            return 0;
+//        }
+//
+//        @Override
+//        public boolean isFaceUp() {
+//            return false;
+//        }
+//
+//        @Override
+//        public boolean isFront() {
+//            return false;
+//        }
+//
+//        @Override
+//        public int getColor() {
+//            return 0;
+//        }
+//
+//        @Override
+//        public void open() {
+//        }
+//
+//        @Override
+//        public void close() {
+//        }
+//
+//        @Override
+//        public void hold() {
+//        }
+//
+//        @Override
+//        public void unhold() {
+//        }
+//
+//        @Override
+//        public void draw(Graphics g, int x, int y) {
+//        }
+//    }
 }

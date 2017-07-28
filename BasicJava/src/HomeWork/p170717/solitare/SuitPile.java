@@ -11,7 +11,7 @@ class SuitPile extends CardPile {
         if (!aCard.isFront()) {
             return false;
         }
-        if (empty()) {
+        if (isEmpty()) {
             return aCard.getRank() == 0;
         }
         Card topCard = top();

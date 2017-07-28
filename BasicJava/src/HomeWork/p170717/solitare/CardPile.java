@@ -19,13 +19,13 @@ class CardPile {
         return firstCard;
     }
 
-    public boolean empty() {
+    public boolean isEmpty() {
         return firstCard == null;
     }
 
     // Basic list interface (mostly same for all piles)
     public void join(Card aCard) {
-        aCard.next = firstCard;
+        aCard.setNext(firstCard);
         if (firstCard != null) {
             firstCard.prev = aCard;
         }
@@ -44,11 +44,11 @@ class CardPile {
             return null;
         }
         // change links
-        firstCard = card.next;
+        firstCard = card.getNext();
         if (firstCard != null) {
             firstCard.prev = null;
         }
-        card.next = null;
+        card.setNext(null);
         return card;
     }
 

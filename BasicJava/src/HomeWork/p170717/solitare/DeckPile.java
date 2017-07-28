@@ -26,7 +26,7 @@ class DeckPile extends CardPile {
             // then add the card found there
             join(pileOne.pop());
             // then put the decks back together
-            while (!pileTwo.empty()) {
+            while (!pileTwo.isEmpty()) {
                 pileOne.join(pileTwo.pop());
             }
         }
@@ -39,8 +39,8 @@ class DeckPile extends CardPile {
             return;
         }
         // Refill deckPile
-        if (empty()) {
-            while (!Solitare.discardPile.empty()) {
+        if (isEmpty()) {
+            while (!Solitare.discardPile.isEmpty()) {
                 Card cardToRemove = Solitare.discardPile.pop();
                 cardToRemove.close();
                 join(cardToRemove);

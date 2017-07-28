@@ -50,7 +50,7 @@ public class StackTests {
         Asserts.assertEquals(stack.isEmpty(), false);
         Asserts.assertEquals(stack.getSize(), 3);
 
-        //empty test
+        //isEmpty test
         stack = new StringStack(0);
 
         Asserts.assertEquals(stack.toString(), "[]");

@@ -1,19 +1,17 @@
-package ClassWork.p120717;
+package ClassWork.p280717.exception;
 
-import static ClassWork.p120717.UseFixedStringStack.testFixedStringStack;
-
-public class FixedStringStack {
+public class StringStackWithThrow {
 
     private static final int DEFAULT_MAX_SIZE = 3;
     private final String[] data_;
     private int size_;
     private final int maxSize_;
 
-    public FixedStringStack() {
+    public StringStackWithThrow() {
         this(DEFAULT_MAX_SIZE);
     }
 
-    public FixedStringStack(int maxSize) {
+    public StringStackWithThrow(int maxSize) {
         this.data_ = new String[maxSize];
         this.size_ = 0;
         this.maxSize_ = maxSize;
@@ -27,9 +25,9 @@ public class FixedStringStack {
         return this.size_ == 0;
     }
 
-    public boolean push(String string) {
+    public boolean push(String string) throws Exception {
         if (this.size_ == this.maxSize_) {
-            return false;
+            throw new Exception("Stack overflow  ");
         }
 
         this.data_[this.size_++] = string;
@@ -73,12 +71,5 @@ public class FixedStringStack {
         sb.append(']');
 
         return sb.toString();
-    }
-
-
-    public static void main(String[] args) {
-        FixedStringStack stack = new FixedStringStack(3);
-
-        testFixedStringStack(stack);
     }
 }
