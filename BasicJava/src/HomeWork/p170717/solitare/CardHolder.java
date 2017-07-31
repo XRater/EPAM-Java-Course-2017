@@ -2,12 +2,12 @@ package HomeWork.p170717.solitare;
 
 class CardHolder {
 
-    static private Card card = null;
+    static private Card card = Card.EMPTY_CARD;
     static private CardPile pile = null;
 
     //access attributes
     public static boolean isHoldingCard() {
-        return card != null;
+        return !card.isEmpty();
     }
 
     public static Card getCard() {
@@ -26,10 +26,8 @@ class CardHolder {
     }
 
     public static void unhold() {
-        if (card != null) {
-            card.unhold();
-        }
-        card = null;
+        card.unhold();
+        card = Card.EMPTY_CARD;
         pile = null;
     }
 }

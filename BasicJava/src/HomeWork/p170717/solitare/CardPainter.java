@@ -24,9 +24,9 @@ class CardPainter {
         g.drawLine(x + 25, y + 20, x + 40, y + 50);
         g.drawLine(x + 40, y + 50, x + 10, y + 50);
         g.drawLine(x + 10, y + 50, x + 25, y + 20);
-        g.drawLine(x + 23, y + 45, x + 20, y + 60);
+        g.drawLine(x + 22, y + 50, x + 20, y + 60);
         g.drawLine(x + 20, y + 60, x + 30, y + 60);
-        g.drawLine(x + 30, y + 60, x + 27, y + 45);
+        g.drawLine(x + 30, y + 60, x + 28, y + 50);
     }
 
     public void drawDiamond(int x, int y) {

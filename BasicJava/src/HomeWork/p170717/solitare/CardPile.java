@@ -12,7 +12,7 @@ class CardPile {
     CardPile(int xCoord, int yCoord) {
         x = xCoord;
         y = yCoord;
-        firstCard = null;
+        firstCard = Card.EMPTY_CARD;
     }
 
     public Card top() {
@@ -20,18 +20,16 @@ class CardPile {
     }
 
     public boolean isEmpty() {
-        return firstCard == null;
+        return firstCard.isEmpty();
     }
 
     // Basic list interface (mostly same for all piles)
     public void join(Card aCard) {
         aCard.setNext(firstCard);
-        if (firstCard != null) {
-            firstCard.prev = aCard;
-        }
+        firstCard.setPrev(aCard);
         firstCard = aCard;
-        while (firstCard.prev != null) {
-            firstCard = firstCard.prev;
+        while (!firstCard.isFront()) {
+            firstCard = firstCard.getPrev();
         }
     }
 
@@ -40,19 +38,14 @@ class CardPile {
     }
 
     public Card split(Card card) {
-        if (card == null) {
-            return null;
-        }
         // change links
         firstCard = card.getNext();
-        if (firstCard != null) {
-            firstCard.prev = null;
-        }
-        card.setNext(null);
+        firstCard.setPrev(Card.EMPTY_CARD);
+        card.setNext(Card.EMPTY_CARD);
         return card;
     }
 
-    // Click proccessing
+    // Click processing
     public void simpleClick(Card card) {
         if (CardHolder.isHoldingCard()) {
             if (canTake(CardHolder.getCard())) {
@@ -67,9 +60,6 @@ class CardPile {
 
     public void doubleClick(Card card) {
         CardHolder.unhold();
-        if (top() != card) {
-            return;
-        }
 
         for (int i = 0; i < 4; i++) {
             if (Solitare.suitPile[i].canTake(card)) {
@@ -81,10 +71,10 @@ class CardPile {
 
     // Pick and drop related methods
     public void pick(Card card) {
-        if (card != null) {
-            CardHolder.hold(this, card);
-        } else {
+        if (card.isEmpty()) {
             CardHolder.unhold();
+        } else {
+            CardHolder.hold(this, card);
         }
     }
 
@@ -102,13 +92,13 @@ class CardPile {
         if (inside(x, y)) {
             return top();
         }
-        return null;
+        return Card.EMPTY_CARD;
     }
 
     // Visual
     public void display(Graphics g) {
         CardPainter painter = new CardPainter(g);
-        if (firstCard == null) {
+        if (firstCard == Card.EMPTY_CARD) {
             painter.drawEmptyCard(Constants.BLACK, x, y);
         } else {
             firstCard.draw(g, x, y);

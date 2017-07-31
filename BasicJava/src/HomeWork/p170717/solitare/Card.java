@@ -4,7 +4,7 @@ import java.awt.*;
 
 class Card {
 
-//    public static final EmptyCard EMPTY_CARD = new EmptyCard();
+    public static final EmptyCard EMPTY_CARD = new EmptyCard();
 
     // data fields for suits
     final static int heart = 0;
@@ -21,8 +21,8 @@ class Card {
 
     private boolean holded;
     private boolean faceup;
-    private Card next = null;
-    public Card prev = null;
+    private Card next = EMPTY_CARD;
+    private Card prev = EMPTY_CARD;
 
     // constructor
     Card(int suitValue, int rankValue) {
@@ -49,12 +49,20 @@ class Card {
         return suit;
     }
 
+    public boolean isEmpty() {
+        return false;
+    }
+
     public boolean isFaceUp() {
         return faceup;
     }
 
     public boolean isFront() {
-        return prev == null;
+        return prev == EMPTY_CARD;
+    }
+
+    public boolean isBack() {
+        return next == EMPTY_CARD;
     }
 
     public int getColor() {
@@ -122,55 +130,83 @@ class Card {
 
 
     //empty card class
-//    private static class EmptyCard extends Card {
-//
-//        EmptyCard() {
-//            super(0, 0);
-//        }
-//
-//        @Override
-//        public int getRank() {
-//            return 0;
-//        }
-//
-//        @Override
-//        public int getSuit() {
-//            return 0;
-//        }
-//
-//        @Override
-//        public boolean isFaceUp() {
-//            return false;
-//        }
-//
-//        @Override
-//        public boolean isFront() {
-//            return false;
-//        }
-//
-//        @Override
-//        public int getColor() {
-//            return 0;
-//        }
-//
-//        @Override
-//        public void open() {
-//        }
-//
-//        @Override
-//        public void close() {
-//        }
-//
-//        @Override
-//        public void hold() {
-//        }
-//
-//        @Override
-//        public void unhold() {
-//        }
-//
-//        @Override
-//        public void draw(Graphics g, int x, int y) {
-//        }
-//    }
+    private static class EmptyCard extends Card {
+
+        EmptyCard() {
+            super(0, 0);
+        }
+
+        @Override
+        public Card getNext() {
+            return this;
+        }
+
+        @Override
+        public Card getPrev() {
+            return this;
+        }
+
+        @Override
+        public void setNext(Card card) {
+        }
+
+        @Override
+        public void setPrev(Card card) {
+        }
+
+        @Override
+        public int getRank() {
+            return -1;
+        }
+
+        @Override
+        public int getSuit() {
+            return -1;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return true;
+        }
+
+        @Override
+        public boolean isFaceUp() {
+            return false;
+        }
+
+        @Override
+        public boolean isFront() {
+            return false;
+        }
+
+        @Override
+        public boolean isBack() {
+            return false;
+        }
+
+        @Override
+        public int getColor() {
+            return -1;
+        }
+
+        @Override
+        public void open() {
+        }
+
+        @Override
+        public void close() {
+        }
+
+        @Override
+        public void hold() {
+        }
+
+        @Override
+        public void unhold() {
+        }
+
+        @Override
+        public void draw(Graphics g, int x, int y) {
+        }
+    }
 }

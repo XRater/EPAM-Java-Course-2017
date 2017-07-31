@@ -1,6 +1,19 @@
-package ClassWork.p280717.exception;
+package ClassWork.p310717.exception;
 
 public class StringStackWithThrow {
+
+    public static class Overflow extends Exception {
+
+        private final int size;
+
+        public Overflow(int size) {
+            this.size = size;
+        }
+
+        public int getSize() {
+            return size;
+        }
+    }
 
     private static final int DEFAULT_MAX_SIZE = 3;
     private final String[] data_;
@@ -26,8 +39,13 @@ public class StringStackWithThrow {
     }
 
     public boolean push(String string) throws Exception {
+
+        if (string == null) {
+            throw new IllegalAccessException("Nulls are not allowed");
+        }
+
         if (this.size_ == this.maxSize_) {
-            throw new Exception("Stack overflow  ");
+            throw new Overflow(size_);
         }
 
         this.data_[this.size_++] = string;

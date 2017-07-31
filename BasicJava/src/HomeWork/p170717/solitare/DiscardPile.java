@@ -10,12 +10,12 @@ class DiscardPile extends CardPile {
          We cant put a card back to the discard pile,
          thus we need this override
     */
-    @Override
-    public void simpleClick(Card card) {
-        if (CardHolder.isHoldingCard()) {
-            CardHolder.unhold();
-        } else {
-            pick(card);
-        }
-    }
+//    @Override
+//    public void simpleClick(Card card) {
+//        if (CardHolder.isHoldingCard()) {
+//            CardHolder.unhold();
+//        } else {
+//            pick(card);
+//        }
+//    }
 }

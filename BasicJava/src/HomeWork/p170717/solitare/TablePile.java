@@ -12,9 +12,7 @@ class TablePile extends CardPile {
             join(Solitare.deckPile.pop());
         }
         // open topmost card face up
-        if (!isEmpty()) {
-            top().open();
-        }
+        top().open();
     }
 
     @Override
@@ -31,27 +29,27 @@ class TablePile extends CardPile {
     public Card getCard(int xCoord, int yCoord) {
         Card card = top();
 
-        if (xCoord < x || xCoord > x + Constants.CARD_WIDTH || yCoord < y || card == null) {
-            return null;
+        if (xCoord < x || xCoord > x + Constants.CARD_WIDTH || yCoord < y || card.isEmpty()) {
+            return Card.EMPTY_CARD;
         }
 
         // move down to the last card
-        while (card.getNext() != null) {
+        while (!card.isBack()) {
             card = card.getNext();
         }
 
         //move up while we are out of card
         int cardY = y;
-        while (yCoord > cardY + 35 && card.prev != null) {
-            card = card.prev;
+        while (yCoord > cardY + 35 && !card.isFront()) {
+            card = card.getPrev();
             cardY += 35;
         }
 
         if (!card.isFaceUp()) {
-            return null;
+            return Card.EMPTY_CARD;
         }
         if (yCoord > cardY + Constants.CARD_HEIGHT) {
-            return null;
+            return Card.EMPTY_CARD;
         }
 
         return card;
@@ -61,9 +59,7 @@ class TablePile extends CardPile {
     @Override
     public Card split(Card card) {
         Card resultCard = super.split(card);
-        if (!isEmpty()) {
-            top().open();
-        }
+        top().open();
         return resultCard;
     }
 
@@ -75,7 +71,7 @@ class TablePile extends CardPile {
     }
 
     private int stackDisplay(Graphics g, Card aCard) {
-        if (aCard == null) {
+        if (aCard == Card.EMPTY_CARD) {
             return y;
         }
         int localy = stackDisplay(g, aCard.getNext());
