@@ -15,6 +15,7 @@ class GenericListHack {
         l.add(1);
 
 //        foo(list);
+
         // to prevent this
 
         List<String> strings = Collections.checkedList(new ArrayList<>(), String.class);

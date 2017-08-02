@@ -16,13 +16,13 @@ class TablePile extends CardPile {
     }
 
     @Override
-    public boolean canTake(Card aCard) {
+    public boolean canTake(Card card) {
         if (isEmpty()) {
-            return aCard.getRank() == 12;
+            return card.getRank() == 12;
         }
         Card topCard = top();
-        return (aCard.getColor() != topCard.getColor()) &&
-                (aCard.getRank() == topCard.getRank() - 1);
+        return (card.getColor() != topCard.getColor()) &&
+                (card.getRank() == topCard.getRank() - 1);
     }
 
     @Override
@@ -66,16 +66,15 @@ class TablePile extends CardPile {
     // By this implementation we support drop click in any place of column
     @Override
     public boolean inside(int xCoord, int yCoord) {
-        int size = 0;
         return xCoord >= x && xCoord <= x + Constants.CARD_WIDTH && yCoord >= y;
     }
 
-    private int stackDisplay(Graphics g, Card aCard) {
-        if (aCard == Card.EMPTY_CARD) {
+    private int stackDisplay(Graphics g, Card card) {
+        if (card == Card.EMPTY_CARD) {
             return y;
         }
-        int localy = stackDisplay(g, aCard.getNext());
-        aCard.draw(g, x, localy);
+        int localy = stackDisplay(g, card.getNext());
+        card.draw(g, x, localy);
         return localy + 35;
     }
 

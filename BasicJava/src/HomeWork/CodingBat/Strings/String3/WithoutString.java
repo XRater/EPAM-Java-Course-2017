@@ -3,8 +3,7 @@ package HomeWork.CodingBat.Strings.String3;
 class WithoutString {
 
     public String withoutString(String base, String remove) {
-        String copyBase = new String(base);
-        copyBase = copyBase.toLowerCase();
+        String copyBase = base.toLowerCase();
         remove = remove.toLowerCase();
         int index = copyBase.indexOf(remove);
         while (index != -1) {

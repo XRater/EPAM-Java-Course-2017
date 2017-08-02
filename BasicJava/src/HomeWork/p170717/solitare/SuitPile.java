@@ -7,15 +7,15 @@ class SuitPile extends CardPile {
     }
 
     @Override
-    public boolean canTake(Card aCard) {
-        if (!aCard.isFirst()) {
+    public boolean canTake(Card card) {
+        if (!card.isFirst()) {
             return false;
         }
         if (isEmpty()) {
-            return aCard.getRank() == 0;
+            return card.getRank() == 0;
         }
         Card topCard = top();
-        return (aCard.getSuit() == topCard.getSuit()) &&
-                (aCard.getRank() == 1 + topCard.getRank());
+        return (card.getSuit() == topCard.getSuit()) &&
+                (card.getRank() == 1 + topCard.getRank());
     }
 }

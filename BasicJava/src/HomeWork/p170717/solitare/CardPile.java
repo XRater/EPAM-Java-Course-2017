@@ -24,10 +24,10 @@ class CardPile {
     }
 
     // Basic list interface (mostly same for all piles)
-    public void join(Card aCard) {
-        aCard.setNext(firstCard);
-        firstCard.setPrev(aCard);
-        firstCard = aCard;
+    public void join(Card card) {
+        card.setNext(firstCard);
+        firstCard.setPrev(card);
+        firstCard = card;
         while (!firstCard.isFirst()) {
             firstCard = firstCard.getPrev();
         }
@@ -78,7 +78,7 @@ class CardPile {
         }
     }
 
-    public boolean canTake(Card aCard) {
+    public boolean canTake(Card card) {
         return false;
     }
 
