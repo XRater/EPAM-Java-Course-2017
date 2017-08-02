@@ -28,7 +28,7 @@ class CardPile {
         aCard.setNext(firstCard);
         firstCard.setPrev(aCard);
         firstCard = aCard;
-        while (!firstCard.isFront()) {
+        while (!firstCard.isFirst()) {
             firstCard = firstCard.getPrev();
         }
     }

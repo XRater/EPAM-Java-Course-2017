@@ -57,11 +57,11 @@ class Card {
         return faceup;
     }
 
-    public boolean isFront() {
+    public boolean isFirst() {
         return prev == EMPTY_CARD;
     }
 
-    public boolean isBack() {
+    public boolean isLast() {
         return next == EMPTY_CARD;
     }
 
@@ -175,12 +175,12 @@ class Card {
         }
 
         @Override
-        public boolean isFront() {
+        public boolean isFirst() {
             return false;
         }
 
         @Override
-        public boolean isBack() {
+        public boolean isLast() {
             return false;
         }
 

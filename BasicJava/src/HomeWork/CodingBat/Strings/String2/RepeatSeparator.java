@@ -3,9 +3,9 @@ package HomeWork.CodingBat.Strings.String2;
 class RepeatSeparator {
 
     public String repeatSeparator(String word, String sep, int count) {
-        String ans = "";
+        StringBuilder ans = new StringBuilder();
         for (int i = 0; i < count - 1; i++) {
-            ans += (word + sep);
+            ans.append(word).append(sep);
         }
         return count == 0 ? "" : ans + word;
     }

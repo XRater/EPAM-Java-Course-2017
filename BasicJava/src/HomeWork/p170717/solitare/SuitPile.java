@@ -8,7 +8,7 @@ class SuitPile extends CardPile {
 
     @Override
     public boolean canTake(Card aCard) {
-        if (!aCard.isFront()) {
+        if (!aCard.isFirst()) {
             return false;
         }
         if (isEmpty()) {

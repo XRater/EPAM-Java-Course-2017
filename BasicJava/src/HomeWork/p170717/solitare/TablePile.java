@@ -34,13 +34,13 @@ class TablePile extends CardPile {
         }
 
         // move down to the last card
-        while (!card.isBack()) {
+        while (!card.isLast()) {
             card = card.getNext();
         }
 
         //move up while we are out of card
         int cardY = y;
-        while (yCoord > cardY + 35 && !card.isFront()) {
+        while (yCoord > cardY + 35 && !card.isFirst()) {
             card = card.getPrev();
             cardY += 35;
         }
