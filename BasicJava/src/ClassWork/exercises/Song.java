@@ -2,13 +2,14 @@ package ClassWork.exercises;
 
 class Song {
 
-    private void foo() {
-
-    }
-
-
-    public void foo(int a) {
-
+    public static void main(String[] dribble) {
+        try {
+            throw new Exception();
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            System.out.print(2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
