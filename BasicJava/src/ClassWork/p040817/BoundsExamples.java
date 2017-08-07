@@ -8,7 +8,7 @@ class BoundsExample {
 
         System.out.println(result);
     }
-
+    
     private static <T extends Comparable<T>> T min(T a, T b) {
         return a.compareTo(b) < 0 ? a : b;
     }
