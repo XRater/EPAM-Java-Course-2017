@@ -1,5 +1,7 @@
 package ClassWork.p040817;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 class DataStructuresExamples {
@@ -12,13 +14,12 @@ class DataStructuresExamples {
         pq.add(20);
         pq.add(1);
 
-//        pq.
+        ArrayList<String> names = new ArrayList<>();
 
-        System.out.println(pq.poll());
-        System.out.println(pq.poll());
-        System.out.println(pq.poll());
+        names.add("sdf");
+        Arrays.sort(new ArrayList[]{names});
 
-//        ArrayList
+        System.out.println(names.get(0));
     }
 
 }
